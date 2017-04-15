@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var calcDisplay: UILabel!
+    public final let possibleOperands: [String] = ["+", "-", "/", "%", "x", "count", "avg", "fact"]
+    
     public var currentOperator: ((Int, Int) -> Int)? = nil
     
     @IBAction func onePressed(_ sender: Any) {
@@ -101,7 +103,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clear(_ sender: Any) {
-        calcDisplay.text! = ""
+        calcDisplay.text! = "0"
     }
     
     func operate(left: Int, right: Int, operation: (Int, Int) -> Int) -> Int {
@@ -152,7 +154,31 @@ class ViewController: UIViewController {
     
     @IBAction func calculate(_ sender: Any) {
         let arg = calcDisplay.text!
-        var result: Int = 0
+        
+        if arg.contains("count") || arg.contains("avg") || arg.contains("fact") {
+            let numString: [String] = arg.characters.split(separator: " ").map(String.init)
+            var numbers: [Int] = []
+            for i in 0...numString.count - 1 {
+                if !possibleOperands.contains(numString[i]) {
+                    numbers.append(Int(numString[i])!)
+                }
+            }
+            
+            if arg.contains("count") {
+                calcDisplay.text = String(count(nums: numbers))
+            } else if arg.contains("avg") {
+                calcDisplay.text = String(average(nums: numbers))
+            } else if arg.contains("fact") {
+                calcDisplay.text = String(factorial(num: numbers[0]))
+            }
+        } else if arg.contains("+") || arg.contains("-") || arg.contains("/") || arg.contains("%") || arg.contains("x") {
+            let numbers = arg.characters.split(separator: " ")
+            let left: Int = Int(String(numbers[0]))!
+            let right: Int = Int(String(numbers[2]))!
+            calcDisplay.text! = String(operate(left: left, right: right, operation: currentOperator!))
+        }
+        
+        
         
     }
     
