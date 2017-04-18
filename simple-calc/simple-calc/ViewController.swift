@@ -178,11 +178,7 @@ class ViewController: UIViewController {
             calcDisplay.text! = String(operate(left: left, right: right, operation: currentOperator!))
         }
         
-        
-        
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
