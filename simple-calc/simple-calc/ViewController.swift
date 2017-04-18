@@ -14,53 +14,16 @@ class ViewController: UIViewController {
     
     public var currentOperator: ((Int, Int) -> Int)? = nil
     
-    @IBAction func onePressed(_ sender: Any) {
-        addNum(1)
+    @IBAction func numberPressed(_ sender: Any) {
+        let number = (sender as AnyObject).titleLabel!!.text
+        addNum(number!)
     }
     
-    @IBAction func twoPressed(_ sender: Any) {
-        addNum(2)
-    }
-    
-    @IBAction func threePressed(_ sender: Any) {
-        addNum(3)
-    }
-    
-    @IBAction func fourPressed(_ sender: Any) {
-        addNum(4)
-    }
-    
-    @IBAction func fivePressed(_ sender: Any) {
-        addNum(5)
-    }
-    
-    @IBAction func sixPressed(_ sender: Any) {
-        addNum(6)
-    }
-    
-    @IBAction func sevenPressed(_ sender: Any) {
-        addNum(7)
-    }
-    
-    @IBAction func eightPressed(_ sender: Any) {
-        addNum(8)
-    }
-    
-    @IBAction func ninePressed(_ sender: Any) {
-        addNum(9)
-    }
-    
-    @IBAction func zeroPressed(_ sender: Any) {
-        if calcDisplay.text != nil && calcDisplay.text! != "" {
-            calcDisplay.text! += "0"
-        }
-    }
-    
-    func addNum(_ num: Int) {
+    func addNum(_ num: String) {
         if calcDisplay.text! == "0" {
-            calcDisplay.text = String(num)
+            calcDisplay.text = num
         } else {
-            calcDisplay.text! += String(num)
+            calcDisplay.text! += num
         }
     }
     
