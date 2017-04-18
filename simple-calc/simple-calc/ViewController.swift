@@ -53,7 +53,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func count(_ sender: Any) {
-        //currentOperator = count
         calcDisplay.text! += " count "
     }
     
